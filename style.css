@@ -1,3 +1,48 @@
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  transition: background-color 0.5s;
+}
+
+.head-line-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.icon-area {
+  margin-top: 0.7em;
+}
+
+.icon-button {
+  padding: 8px 9px 9px;
+  margin-top: 5px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  /* background-color: gray; */
+  transform: scale(1.2);
+}
+
+#input-area {
+  display: none;
+}
+
+.search-button {
+  background-color: black;
+  border: 1px solid black;
+  color: rgb(255, 255, 255);
+  height: 33px;
+  border-radius: 3px;
+}
+#search-input {
+  border: 1px solid rgb(226, 226, 226);
+  border-radius: 3px;
+  height: 33px;
+}
+
 .head-line {
   display: flex;
   justify-content: center;
@@ -5,7 +50,7 @@
 }
 
 .head-line svg {
-  width: 430px;
+  width: 400px;
 }
 
 .menus {
@@ -13,18 +58,24 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 5px 0;
   border-top: 1px solid #ebebeb;
   border-bottom: 4px double black;
 }
 
 .menus button {
+  font-size: 18px;
   background: none;
   border: none;
   margin: 5px;
+  transition: 0.3s;
 }
 
 .menus button:hover {
-  background-color: antiquewhite;
+  background-color: rgb(231, 228, 228);
+  border-radius: 5px;
+  /* transform: scale(1.1); */
+  /* font-weight: bold; */
 }
 
 .news-img-size {
@@ -35,4 +86,66 @@
 .news {
   padding: 1em;
   border-bottom: 2px solid black;
+}
+
+.hide {
+  display: none;
+}
+
+/* 사이드 바 */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0, 0.85);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav button {
+  background: none;
+  border: none;
+  padding: 8px 8px 8px 20px;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav button:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#main {
+  transition: margin-left 0.5s;
+  padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav button {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 63rem) {
+  .hide {
+    display: inline-block;
+  }
+  .menus {
+    display: none;
+  }
 }
