@@ -88,6 +88,21 @@ body {
   border-bottom: 2px solid black;
 }
 
+.title {
+  font-size: 20pt;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.title:hover {
+  text-decoration: underline;
+}
+
+.title:visited {
+  color: purple;
+}
+
 .hide {
   display: none;
 }
