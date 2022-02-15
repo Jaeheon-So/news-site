@@ -1,7 +1,7 @@
 // 사이드바 스타일 꾸미기
-// 검색기능 설정
 // 페이지 리스트 설정
 // 초기 이미지, 배경 설정
+// 매우 디테일한 기능들은 후순위
 let news = [];
 let url = new URL(
   "https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&page_size=10"
@@ -11,6 +11,8 @@ let header = new Headers({
   "x-api-key": apiKey,
 });
 
+let searchInput = document.getElementById("search-input");
+let btnSearch = document.getElementById("btn-search");
 let mainImg = document.getElementById("main-img");
 let menuList = document.querySelectorAll("#menu-list button");
 
@@ -23,6 +25,7 @@ const getNews = async () => {
 };
 
 const getLatestNews = () => {
+  searchInput.value = "";
   url = new URL(
     "https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&page_size=10"
   );
@@ -30,11 +33,25 @@ const getLatestNews = () => {
 };
 
 const getNewsByTopic = (e) => {
+  searchInput.value = "";
   let topic = e.target.textContent.toLowerCase();
   url = new URL(
     `https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&topic=${topic}&page_size=10`
   );
   console.log("clicked!! " + topic);
+  getNews();
+};
+
+const searchNews = () => {
+  console.log("Go search!!");
+  let inputValue = searchInput.value;
+  if (inputValue == "") {
+    alert("내용을 입력하주세요.");
+    return;
+  }
+  url = new URL(
+    `https://api.newscatcherapi.com/v2/search?q=${inputValue}&page_size=10`
+  );
   getNews();
 };
 
@@ -102,6 +119,11 @@ const openSearchBox = () => {
 };
 
 getLatestNews();
+searchInput.addEventListener("keyup", (e) => {
+  if (e.keyCode === 13) {
+    searchNews(e);
+  }
+});
 mainImg.addEventListener("click", getLatestNews);
 menuList.forEach((item) => {
   item.addEventListener("click", (e) => getNewsByTopic(e));
