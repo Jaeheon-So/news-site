@@ -51,6 +51,7 @@ body {
 
 .head-line svg {
   width: 400px;
+  cursor: pointer;
 }
 
 .menus {

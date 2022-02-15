@@ -1,23 +1,41 @@
 // 사이드바 스타일 꾸미기
-// 이미지 크기 조정
-// 카테고리 설정
 // 검색기능 설정
 // 페이지 리스트 설정
 // 초기 이미지, 배경 설정
 let news = [];
+let url = new URL(
+  "https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&page_size=10"
+);
+const apiKey = "vq01P3HWuOsEDmdK2FK2gp_9Q00Tjfa1VONOQiIRU1Q";
+let header = new Headers({
+  "x-api-key": apiKey,
+});
 
-const getLatestNews = async () => {
-  let url = new URL(
-    "https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&page_size=10"
-  );
-  let header = new Headers({
-    "x-api-key": "vq01P3HWuOsEDmdK2FK2gp_9Q00Tjfa1VONOQiIRU1Q",
-  });
+let mainImg = document.getElementById("main-img");
+let menuList = document.querySelectorAll("#menu-list button");
+
+const getNews = async () => {
   let response = await fetch(url, { headers: header });
   let data = await response.json();
   news = data.articles;
   console.log(news);
   render();
+};
+
+const getLatestNews = () => {
+  url = new URL(
+    "https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&page_size=10"
+  );
+  getNews();
+};
+
+const getNewsByTopic = (e) => {
+  let topic = e.target.textContent.toLowerCase();
+  url = new URL(
+    `https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&topic=${topic}&page_size=10`
+  );
+  console.log("clicked!! " + topic);
+  getNews();
 };
 
 const render = () => {
@@ -84,3 +102,7 @@ const openSearchBox = () => {
 };
 
 getLatestNews();
+mainImg.addEventListener("click", getLatestNews);
+menuList.forEach((item) => {
+  item.addEventListener("click", (e) => getNewsByTopic(e));
+});
