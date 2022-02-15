@@ -1,4 +1,6 @@
 // 사이드바 스타일 꾸미기
+// 현재 있는 카테고리 표시하기
+// 카테고리 고정 결정
 // 페이지 리스트 설정
 // 초기 이미지, 배경 설정
 // 매우 디테일한 기능들은 후순위
@@ -39,6 +41,7 @@ const getNewsByTopic = (e) => {
     `https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&topic=${topic}&page_size=10`
   );
   console.log("clicked!! " + topic);
+  window.scrollTo({ top: 0, behavior: "smooth" });
   getNews();
 };
 
@@ -52,6 +55,7 @@ const searchNews = () => {
   url = new URL(
     `https://api.newscatcherapi.com/v2/search?q=${inputValue}&page_size=10`
   );
+  window.scrollTo({ top: 0, behavior: "smooth" });
   getNews();
 };
 

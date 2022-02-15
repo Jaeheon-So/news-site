@@ -40,24 +40,20 @@
     </div>
 
     <section class="container">
+      <div class="icon-area">
+        <i class="fas fa-bars fa-lg hide icon-button" onclick="openNav()"></i>
+        <i
+          class="fas fa-search fa-lg icon-button"
+          onclick="openSearchBox()"
+        ></i>
+        <span id="input-area">
+          <input type="text" id="search-input" placeholder="search" />
+          <button class="search-button" id="btn-search" onclick="searchNews()">
+            Go
+          </button>
+        </span>
+      </div>
       <section class="head-line-section">
-        <div class="icon-area">
-          <i class="fas fa-bars fa-lg hide icon-button" onclick="openNav()"></i>
-          <i
-            class="fas fa-search fa-lg icon-button"
-            onclick="openSearchBox()"
-          ></i>
-          <span id="input-area">
-            <input type="text" id="search-input" placeholder="search" />
-            <button
-              class="search-button"
-              id="btn-search"
-              onclick="searchNews()"
-            >
-              Go
-            </button>
-          </span>
-        </div>
         <div class="head-line">
           <svg id="main-img" viewBox="0 0 184 25" fill="#000">
             <path

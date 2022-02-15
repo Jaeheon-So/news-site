@@ -12,6 +12,9 @@ body {
 
 .icon-area {
   margin-top: 0.7em;
+  position: sticky;
+  top: 0;
+  background-color: rgb(255, 255, 255, 0.8);
 }
 
 .icon-button {
@@ -61,7 +64,7 @@ body {
   flex-wrap: wrap;
   padding: 5px 0;
   border-top: 1px solid #ebebeb;
-  border-bottom: 4px double black;
+  /* border-bottom: 4px double black; */
 }
 
 .menus button {
@@ -85,8 +88,12 @@ body {
 }
 
 .news {
-  padding: 1em;
+  padding: 1em 0;
   border-bottom: 2px solid black;
+}
+
+.news:first-child {
+  border-top: 4px double black;
 }
 
 .title {
@@ -163,5 +170,11 @@ body {
   }
   .menus {
     display: none;
+  }
+  .news {
+    padding: 1em;
+  }
+  .news:first-child {
+    border-top: none;
   }
 }
