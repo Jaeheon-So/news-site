@@ -5,6 +5,8 @@
 // 초기 이미지, 배경 설정
 // 매우 디테일한 기능들은 후순위
 let news = [];
+let page = 1;
+let totalPage = 0;
 let url = new URL(
   "https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&page_size=10"
 );
@@ -20,6 +22,7 @@ let menuList = document.querySelectorAll("#menu-list button");
 
 const getNews = async () => {
   try {
+    url.searchParams.set("page", page);
     let response = await fetch(url, { headers: header });
     let data = await response.json();
     if (response.status == 200) {
@@ -27,8 +30,11 @@ const getNews = async () => {
         throw new Error(data.status);
       }
       news = data.articles;
+      page = data.page;
+      totalPage = data.total_pages;
       console.log(news);
       render();
+      pageRender();
     } else {
       throw new Error(data.message);
     }
@@ -39,6 +45,7 @@ const getNews = async () => {
 };
 
 const getLatestNews = () => {
+  page = 1;
   searchInput.value = "";
   url = new URL(
     "https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&page_size=10"
@@ -47,6 +54,7 @@ const getLatestNews = () => {
 };
 
 const getNewsByTopic = (e) => {
+  page = 1;
   searchInput.value = "";
   let topic = e.target.textContent.toLowerCase();
   url = new URL(
@@ -58,6 +66,7 @@ const getNewsByTopic = (e) => {
 };
 
 const searchNews = () => {
+  page = 1;
   console.log("Go search!!");
   let inputValue = searchInput.value;
   if (inputValue == "") {
@@ -100,9 +109,47 @@ const render = () => {
   document.getElementById("news-board").innerHTML = newsHtml;
 };
 
+const pageRender = () => {
+  let paginationHtml = "";
+  let pageGroup = Math.ceil(page / 5);
+  let last = pageGroup * 5;
+  if (last > totalPage) {
+    last = totalPage;
+  }
+  let first = last - 4 <= 0 ? 1 : last - 4;
+  if (first >= 6) {
+    paginationHtml = `<li class="page-item" onclick="pageClick(1)">
+                        <a class="page-link" href='#js-bottom'>&lt;&lt;</a>
+                      </li>
+                      <li class="page-item" onclick="pageClick(${page - 1})">
+                        <a class="page-link" href='#js-bottom'>&lt;</a>
+                      </li>`;
+  }
+  for (let i = first; i <= last; i++) {
+    paginationHtml += `<li class="page-item ${i == page ? "active" : ""}">
+                        <a class="page-link" href="#" onclick="pageClick(${i})">${i}</a>
+                      </li>`;
+  }
+  if (last < totalPage) {
+    paginationHtml += `<li class="page-item" onclick="pageClick(${page + 1})">
+                        <a  class="page-link" href='#js-program-detail-bottom'>&gt;</a>
+                       </li>
+                       <li class="page-item" onclick="pageClick(${totalPage})">
+                        <a class="page-link" href='#js-bottom'>&gt;&gt;</a>
+                       </li>`;
+  }
+  document.querySelector(".pagination").innerHTML = paginationHtml;
+};
+
 const errorRender = (message) => {
   let errorHtml = `<h2 class="text-center alert alert-danger mt-1">${message}</h2>`;
   document.getElementById("news-board").innerHTML = errorHtml;
+};
+
+const pageClick = (pageNum) => {
+  page = pageNum;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  getNews();
 };
 
 const checkNull = (item) => {

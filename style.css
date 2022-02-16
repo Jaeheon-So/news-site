@@ -104,6 +104,8 @@ body {
 }
 
 .title:hover {
+  /* color: rgb(139, 100, 48); */
+  color: #4682db;
   text-decoration: underline;
 }
 
@@ -113,6 +115,28 @@ body {
 
 .hide {
   display: none;
+}
+
+.pagination-nav {
+  display: flex;
+  justify-content: center;
+}
+.pagination {
+  margin-top: 1em;
+}
+
+.page-item.active .page-link {
+  background-color: burlywood;
+  color: white;
+  border-color: burlywood;
+}
+
+.page-link {
+  color: burlywood;
+}
+
+.page-link:hover {
+  color: burlywood;
 }
 
 /* 사이드 바 */
