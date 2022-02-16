@@ -19,11 +19,23 @@ let mainImg = document.getElementById("main-img");
 let menuList = document.querySelectorAll("#menu-list button");
 
 const getNews = async () => {
-  let response = await fetch(url, { headers: header });
-  let data = await response.json();
-  news = data.articles;
-  console.log(news);
-  render();
+  try {
+    let response = await fetch(url, { headers: header });
+    let data = await response.json();
+    if (response.status == 200) {
+      if (data.total_hits == 0) {
+        throw new Error(data.status);
+      }
+      news = data.articles;
+      console.log(news);
+      render();
+    } else {
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    console.log("Error: " + error.message);
+    errorRender(error.message);
+  }
 };
 
 const getLatestNews = () => {
@@ -86,6 +98,11 @@ const render = () => {
     })
     .join("");
   document.getElementById("news-board").innerHTML = newsHtml;
+};
+
+const errorRender = (message) => {
+  let errorHtml = `<h2 class="text-center alert alert-danger mt-1">${message}</h2>`;
+  document.getElementById("news-board").innerHTML = errorHtml;
 };
 
 const checkNull = (item) => {
