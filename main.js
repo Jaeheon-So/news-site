@@ -1,8 +1,5 @@
 // 사이드바 스타일 꾸미기
 // 현재 있는 카테고리 표시하기
-// 카테고리 고정 결정
-// 페이지 리스트 설정
-// 초기 이미지, 배경 설정
 // 매우 디테일한 기능들은 후순위
 let news = [];
 let page = 1;
@@ -119,10 +116,10 @@ const pageRender = () => {
   let first = last - 4 <= 0 ? 1 : last - 4;
   if (first >= 6) {
     paginationHtml = `<li class="page-item" onclick="pageClick(1)">
-                        <a class="page-link" href='#js-bottom'>&lt;&lt;</a>
+                        <a class="page-link" href='#'>&lt;&lt;</a>
                       </li>
                       <li class="page-item" onclick="pageClick(${page - 1})">
-                        <a class="page-link" href='#js-bottom'>&lt;</a>
+                        <a class="page-link" href='#'>&lt;</a>
                       </li>`;
   }
   for (let i = first; i <= last; i++) {
@@ -132,10 +129,10 @@ const pageRender = () => {
   }
   if (last < totalPage) {
     paginationHtml += `<li class="page-item" onclick="pageClick(${page + 1})">
-                        <a  class="page-link" href='#js-program-detail-bottom'>&gt;</a>
+                        <a  class="page-link" href='#'>&gt;</a>
                        </li>
                        <li class="page-item" onclick="pageClick(${totalPage})">
-                        <a class="page-link" href='#js-bottom'>&gt;&gt;</a>
+                        <a class="page-link" href='#'>&gt;&gt;</a>
                        </li>`;
   }
   document.querySelector(".pagination").innerHTML = paginationHtml;
