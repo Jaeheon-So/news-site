@@ -4,7 +4,7 @@ let totalPage = 0;
 let url = new URL(
   "https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&page_size=10"
 );
-const apiKey = "h-MTLxJ5rPB3QlJrVRLt5yJdB7IXgStQEX85IqLpGwI";
+const apiKey = "4IXQQVl5uM5FOsBJFjlP5jqWMz8alFaPAe8BLpIpjsI";
 let header = new Headers({
   "x-api-key": apiKey,
 });
